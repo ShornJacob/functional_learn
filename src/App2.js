@@ -32,11 +32,29 @@ console.log(numbersPlusOne)
  ]
 
  //higherorder functions
+ //gets a functions, returns another function
+ //higer order component - takes care of the logic to - smart one
  //https://blog.bitsrc.io/understanding-currying-in-javascript-ceb2188c339
- const withFilterProps = BaseComponent => ({list,side}) => {
-    const transformedProps = list.filter(char => char.side === side)
-    return <BaseComponent list={transformedProps} />
- }
+//  const withFilterProps = BaseComponent => ({list,side}) => {
+//     const transformedProps = list.filter(char => char.side === side)
+//     return <BaseComponent list={transformedProps} />
+//  }
+
+ //more generel
+ //first argument function
+const withTransformProps = transformFunc => {
+    const ConfiguredComponent = BaseComponent => {
+        return baseProps => {
+            const transformedProps = transformFunc(baseProps)
+            return <BaseComponent {...transformedProps} />
+        }
+    }
+//configured component will have transofrmationfucntion responsibloe for filtering inside a closure
+//but it still required BaseCompnent
+
+
+    return ConfiguredComponent
+}
 
  const renderDisplayList = ({list,side}) => { 
  return (
@@ -49,10 +67,22 @@ console.log(numbersPlusOne)
      )}
  </div> ) }
 
- const FilteredList = withFilterProps(renderDisplayList)
+ //const FilteredList = withFilterProps(renderDisplayList)
+  //base component will take care for the ui - dump one
+ const FilteredList = withTransformProps(
+     ({list,side}) => ({
+         list : list.filter(char => char.side ===side)
+ }))(renderDisplayList)
+//first is configurationfunction, responsible  for filtering
+//withtransformProps returns a function, that has the tranformation function has a closure
+//that function will be called with renderDisplayList
+//we get back a function that reuires baseProps, that is the FilteredList
 
- console.log(FilteredList)
+console.log(FilteredList)
 
+ //we are using a function returned from a function, FilteredList
+ //enhanced renderdisplayprops wit withfilterProps
+ //this makes renderDipslayList reusable
   return (
     <FilteredList list={starWarsChars} side="dark"/>
   );
