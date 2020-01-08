@@ -23,6 +23,7 @@ console.log(numbersPlusOne)
 
  console.log(operation)
 
+
  const starWarsChars = [
      { name : 'Luke', side:'light' },
      { name : 'Darth Vader', side:'dark' },
@@ -30,13 +31,17 @@ console.log(numbersPlusOne)
      { name : 'Palpatine', side:'dark' },
  ]
 
- const FilteredDisplayList = ({list,side}) => { 
+ //higherorder functions
+ //https://blog.bitsrc.io/understanding-currying-in-javascript-ceb2188c339
+ const withFilterProps = BaseComponent => ({list,side}) => {
+    const transformedProps = list.filter(char => char.side === side)
+    return <BaseComponent list={transformedProps} />
+ }
 
- const filteredList = list.filter(char => char.side === side)
- 
+ const renderDisplayList = ({list,side}) => { 
  return (
  <div>
-     {filteredList.map(char =>
+     {list.map(char =>
      <div key={char.name}>
          <div>Character : {char.name}</div>
          <div>Side: {char.side}</div>
@@ -44,8 +49,12 @@ console.log(numbersPlusOne)
      )}
  </div> ) }
 
+ const FilteredList = withFilterProps(renderDisplayList)
+
+ console.log(FilteredList)
+
   return (
-    <FilteredDisplayList list={starWarsChars} side="light"/>
+    <FilteredList list={starWarsChars} side="dark"/>
   );
 }
 
