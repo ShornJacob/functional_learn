@@ -42,19 +42,28 @@ console.log(numbersPlusOne)
 
  //more generel
  //first argument function
-const withTransformProps = transformFunc => {
-    const ConfiguredComponent = BaseComponent => {
-        return baseProps => {
-            const transformedProps = transformFunc(baseProps)
-            return <BaseComponent {...transformedProps} />
-        }
-    }
+// const withTransformProps = transformFunc => {
+//     const ConfiguredComponent = BaseComponent => {
+//         return baseProps => {
+//             const transformedProps = transformFunc(baseProps)
+//             return <BaseComponent {...transformedProps} />
+//         }
+//     }
 //configured component will have transofrmationfucntion responsibloe for filtering inside a closure
 //but it still required BaseCompnent
+//    return ConfiguredComponent
+//}
+
+const withTransformProps = mapperFunc =>
+  BaseComponent => baseProps => {
+      const transformedProps = mapperFunc(baseProps)
+      return <BaseComponent {...transformedProps} />
+  }
 
 
-    return ConfiguredComponent
-}
+
+
+
 
  const renderDisplayList = ({list,side}) => { 
  return (
@@ -77,6 +86,7 @@ const withTransformProps = transformFunc => {
 //withtransformProps returns a function, that has the tranformation function has a closure
 //that function will be called with renderDisplayList
 //we get back a function that reuires baseProps, that is the FilteredList
+//baseprops is an obkect with list and side
 
 console.log(FilteredList)
 
@@ -89,3 +99,8 @@ console.log(FilteredList)
 }
 
 export default App;
+
+
+//const HoC = config => BaseComponent =>enhancedComponent
+
+//https://www.youtube.com/watch?v=jAsU-FejzIE
