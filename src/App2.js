@@ -61,10 +61,6 @@ const withTransformProps = mapperFunc =>
   }
 
 
-
-
-
-
  const renderDisplayList = ({list,side}) => { 
  return (
  <div>
