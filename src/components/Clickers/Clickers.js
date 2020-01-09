@@ -8,7 +8,11 @@ export default function Clickers() {
   }
 
   const decrease = () => {
-    setCount(count - 1)
+      //after 250 ms. to mimic async calls
+      setTimeout( () => {
+        setCount(count - 1)
+      },250)
+    
   }
 
   return (
