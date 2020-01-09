@@ -58,3 +58,7 @@ export default async function unsplash(term) {
 //   params: {
 //     ID: 12345
 //   },
+
+
+//https://www.youtube.com/watch?v=9Yrd4aZkse8
+//Mocking axios in jest

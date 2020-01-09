@@ -10,4 +10,4 @@ export default {
 //Axios resolves with an object that has a data property
 
 
-//https://www.youtube.com/watch?v=9Yrd4aZkse8
+//https://www.youtube.com/watch?v=9Yrd4aZkse8. 7.52
