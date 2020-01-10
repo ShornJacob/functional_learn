@@ -80,7 +80,7 @@ function renderWithRouter(
     fireEvent.click(el)
 
  
-    debug()
+    //debug()
     // expect(getByText("You are on the about page")).not.toBeInTheDocument() 
 
    
@@ -124,3 +124,8 @@ function renderWithRouter(
 //         </div>
 //       </div>
 //     </body>
+
+//code sandbox
+//https://codesandbox.io/s/distracted-silence-rw0wu
+//https://codesandbox.io/docs/tests
+//https://rw0wu.csb.app
