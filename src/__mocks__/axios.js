@@ -4,7 +4,11 @@ export default {
 
    //return response.data.results
    //undefined
-   get : jest.fn( () => Promise.resolve({data : {}}))
+   // get : jest.fn( () => Promise.resolve({data : {}}))
+
+   get: jest.fn().mockResolvedValue({
+      data: {}
+   })
 }
 
 //Axios resolves with an object that has a data property
