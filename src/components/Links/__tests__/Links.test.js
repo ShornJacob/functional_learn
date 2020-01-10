@@ -1,5 +1,5 @@
 import React from 'react'
-import { render,cleanup } from '@testing-library/react'
+import { render,cleanup,fireEvent } from '@testing-library/react'
 import {
   createHistory,
   createMemorySource,
@@ -17,6 +17,8 @@ import Links from '../Links'
 //const {a = 10, b = 5} = {a: 3};
 //Setting a function parameter's default value
 
+afterEach(cleanup)
+
 function renderWithRouter(
     ui,
     { route = '/', history = createHistory(createMemorySource(route)) } = {}
@@ -30,7 +32,7 @@ function renderWithRouter(
     }
   }
 
-  afterEach(cleanup)
+
 
   test('full app rendering/navigating', async () => {
     const {
@@ -45,9 +47,11 @@ function renderWithRouter(
     // to the page using the navigate function returned from the history object.
     await navigate('/about')
     expect(getByText("You are on the about page")).toBeInTheDocument()
+    // expect(getByText("You are home")).not.toBeInTheDocument() throes because not found
 
     await navigate('/')
     expect(getByText("You are home")).toBeInTheDocument()
+    // expect(getByText("You are on the about page")).not.toBeInTheDocument() throws becaus enot found
   })
 
   //https://testing-library.com/docs/react-testing-library/api
@@ -57,3 +61,66 @@ function renderWithRouter(
 
   //https://testing-library.com/docs/dom-testing-library/api-queries
   //https://testing-library.com/docs/guide-disappearance
+
+  
+  test('navigating to about on click', async () => {
+    const {
+        debug,
+        getByText,
+      history: { navigate },
+    } = renderWithRouter(<Links />)
+
+
+
+    await navigate('/')
+    const el = getByText("about")
+    expect(el).toBeInTheDocument()
+
+
+    fireEvent.click(el)
+
+ 
+    debug()
+    // expect(getByText("You are on the about page")).not.toBeInTheDocument() 
+
+   
+  })
+
+
+  //still in about page, navigae not working in test
+  //https://stackoverflow.com/questions/59298020/testing-navigate-of-reach-router-with-react-testing-library
+  //https://testing-library.com/docs/react-testing-library/api#debug
+
+//   <body>
+//       <div>
+//         <div>
+//           <a
+//             aria-current="page"
+//             href="/"
+//           >
+//             Home
+//           </a>
+//           <a
+//             href="/about"
+//           >
+//             About
+//           </a>
+//           <div
+//             role="group"
+//             style="outline: none;"
+//             tabindex="-1"
+//           >
+//             <div>
+//               <span>
+//                 You are home
+//               </span>
+//               <a
+//                 href="/about"
+//               >
+//                 about
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </body>

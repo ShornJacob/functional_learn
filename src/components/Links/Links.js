@@ -2,13 +2,16 @@ import React from "react";
 import {
   Router,
   Link,
+  navigate,
   createHistory,
   createMemorySource,
   LocationProvider
 } from "@reach/router";
 
+//https://reach.tech/router/api/navigate
+
 const About = () => <div>You are on the about page</div>
-const Home = () => <div>You are home</div>
+const Home = () => <div><span>You are home</span><a href="/about">about</a></div>
 const NoMatch = () => <div>No match</div>
 
 export default function Links() {
