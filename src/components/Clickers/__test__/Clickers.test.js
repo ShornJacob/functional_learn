@@ -31,3 +31,14 @@ test("decrements count async" , async ()=>{
     expect(count).toBeInTheDocument()
     
 })
+
+//the dom output
+//const {debug}
+//await waitForDomchange()
+
+//getbyText throws if it cannot find
+
+//fireEvent.click()
+//fireEvent.change(todoInput, { target : { value : "cc"}})
+
+//cuple of dom changes, use wait for element//untill thro or times out

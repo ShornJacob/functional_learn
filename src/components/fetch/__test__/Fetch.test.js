@@ -59,3 +59,16 @@ test("fecthed and display data", async () => {
   expect(mockAxios.get).toHaveBeenCalledTimes(1)
   expect(mockAxios.get).toHaveBeenCalledWith(url)
 });
+
+
+
+//the dom output
+//const {debug}
+//await waitForDomchange()
+
+//getbyText throws if it cannot find
+
+//fireEvent.click()
+//fireEvent.change(todoInput, { target : { value : "cc"}})
+
+//cuple of dom changes, use wait for element//untill thro or times out
